@@ -1,0 +1,134 @@
+---
+description: Core rules for the Imoli EFL Leasing PHP SDK
+alwaysApply: true
+---
+
+## Project context
+
+- This repository contains a PHP SDK for integrating **EFL Leasing Online** as a payment method in ecommerce platforms.
+- The primary Composer package name is `imoli-pl/efl-leasing-sdk`.
+- The root namespace is `Imoli\\EflLeasingSdk\\` with PSR-4 autoloading from the `src/` directory.
+
+## Language and style
+
+- All repository files **must be written in English**:
+  - Source code, PHPDoc, inline comments.
+  - Markdown files such as `README.md` and other documentation.
+  - Descriptions and comments in configuration files.
+- The only exception are **proper names** (e.g. “EFL Leasing”, official product names, field names coming from the EFL API), which may remain in their original language.
+- Conversations with the user in chat are in Polish, but anything committed to the repository (code, docs, commit messages, tags, branch names) must be in English.
+
+## PHP code conventions
+
+- Use `declare(strict_types=1);` at the top of every PHP file.
+- Follow PSR-12 for coding style.
+- Use strong typing (scalar and object type hints, return types) wherever possible.
+- Organise the code under the `Imoli\\EflLeasingSdk\\` namespace using PSR-4 structure.
+- Keep public APIs stable once released; prefer adding new methods or optional parameters over breaking existing signatures.
+
+## Comments and PHPDoc
+
+- Write comments **only in English** (except for proper names).
+- Prefer comments that explain **why** something is done in a certain way, rather than what the code does.
+- Avoid redundant comments that simply restate obvious code.
+- Use PHPDoc to document:
+  - Public classes, interfaces and traits.
+  - Public methods, especially when:
+    - Parameter/return types are complex or not obvious.
+    - Behaviour or invariants are non-trivial.
+  - Important edge cases, domain constraints or integration details.
+
+## EFL Leasing Online API reference
+
+When implementing or updating HTTP calls, always align with the official EFL Leasing Online documentation:
+
+- Sandbox documentation:  
+  https://leasingonline-sandbox.efl.com.pl/sandboxDocumentationPage
+- Sandbox OpenAPI (Swagger) definition:  
+  https://leasingonlineapi-sandbox.efl.com.pl/swagger/v1/swagger.json
+
+Treat these documents as the source of truth for:
+- Endpoints and HTTP methods.
+- Required and optional parameters.
+- Request and response schemas.
+- Authentication mechanisms (e.g. API key, bearer token).
+
+## Error handling
+
+- Use `EflLeasingException` as the base exception type for all SDK-specific errors.
+- Use more specific subclasses for:
+  - Transport-level and HTTP errors (`HttpException`).
+  - API-level error responses (`ApiException`).
+- Do not throw generic `\Exception` from SDK code; prefer the dedicated exception hierarchy.
+
+## Testing and quality tools
+
+- Prefer PHPUnit for unit and integration tests (configuration in `phpunit.xml.dist`).
+- Use PHPStan for static analysis (`phpstan.neon.dist`), keeping the level reasonably high.
+- Use PHP-CS-Fixer with the provided configuration to maintain consistent coding style.
+- Composer scripts:
+  - `composer test` runs the test suite.
+  - `composer phpstan` runs static analysis.
+  - `composer cs-check` checks coding style.
+  - `composer cs-fix` fixes coding style issues where possible.
+
+## Documentation and Markdown conventions
+
+- **Language and tone**
+  - All documentation content (Markdown) must be in **English**, except for proper names (e.g. “EFL Leasing”) or field names coming from the EFL API.
+  - Use clear, task‑oriented language aimed at backend developers integrating the SDK.
+
+- **Nuxt Content structure and file naming**
+  - Documentation lives under `docs/` and is consumed by **Nuxt Content**.
+  - Directories and files use **two‑digit numeric prefixes** for ordering, e.g.:
+    - `docs/06.api/02.efl-client/01.overview.md`
+    - `docs/06.api/04.models/05.calculation-data.md`
+  - When linking between docs, always point to the **actual `.md` file** with a relative path, e.g.:
+    - `[EflClient overview](06.api/02.efl-client/01.overview.md)`
+    - `[CustomerData](06.api/04.models/15.customer-data.md)`.
+  - Do **not** leave raw file names like `0003.models/001.overview.md` in prose; turn them into proper links.
+  - In documentation prose, do **not** expose bare Markdown file names such as ``docs/06.api/06.errors.md``; always use proper Markdown links with human-readable labels.
+  - Avoid linking a page to itself; when referring to the current page or the primary symbol it documents, use inline code (e.g. ``EflClient``) instead of a self-link.
+
+- **Client method documentation**
+  - For pages describing individual `EflClient` methods:
+    - Frontmatter `title` should be **just the method name** (e.g. `title: getAuthToken`, not `EflClient::getAuthToken`).
+    - In the body, each method section should follow:
+      1. Heading with the method name: `### getAuthToken`.
+      2. Short description of what the method does and which HTTP endpoint it wraps.
+      3. A PHP code block with the exact method signature.
+      4. Optional notes about request/response models and exceptions.
+
+- **Linking SDK symbols**
+  - Whenever a **SDK symbol** (class, enum, interface, exception, model, builder) is mentioned in prose (headings, paragraphs, lists, tables), wrap it in a markdown link to its reference page, e.g.:
+    - `[EflClient](06.api/02.efl-client/01.overview.md)`
+    - `[Config](05.configuration.md)`
+    - `[CustomerData](06.api/04.models/15.customer-data.md)`
+    - `[AssetToCalculationBuilder](06.api/05.builders/02.asset-to-calculation-builder.md)`
+    - `[ApiException](06.api/06.errors.md#apiexception-and-problemdetails)`
+    - `[ProblemDetails](06.api/04.models/44.problem-details.md)`.
+  - Do **not** alter names inside fenced code blocks (```php ... ```); code examples stay as real code without links.
+
+- **Namespaces and escaping**
+  - When showing PHP namespaces in prose or inline code, use **single backslashes** as in real PHP: ``Imoli\EflLeasingSdk\Config``.
+  - In Markdown tables, escape union type pipes inside backticks to avoid column breaks, e.g.:
+    - `` `string\|null` ``, `` `int\|null` ``, `` `bool\|null` ``.
+
+- **Cross‑section navigation**
+  - Use dedicated index/overview pages as hubs:
+    - `docs/06.api/01.overview.md` for API clients, models and error handling.
+    - `docs/06.api/04.models/01.overview.md` for models.
+    - `docs/06.api/05.builders/01.overview.md` for builders.
+    - `docs/06.api/06.errors.md` for exceptions and error payloads.
+    - `docs/06.api/07.http.md` for HTTP abstractions and adapters.
+  - From guides (`docs/07.guides/*.md`), `getting-started` and `quickstart`, prefer linking to these overview pages and specific symbol pages instead of duplicating detailed reference content.
+
+- **Keeping docs in sync with code**
+  - After **any change in the SDK code** (new methods, changed signatures, renamed classes, new models/builders, updated exceptions, etc.), review the relevant documentation pages and update them so that:
+    - method signatures in docs exactly match the PHP code,
+    - lists of methods, models, builders and exceptions are complete and accurate,
+    - examples and narrative descriptions reflect the current behaviour and configuration options.
+  - Do not add or modify public API in code without either:
+    - updating an existing documentation page, or
+    - adding a new documentation page if no suitable place exists.
+

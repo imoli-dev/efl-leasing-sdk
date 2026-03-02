@@ -1,0 +1,29 @@
+---
+description: PHP coding standards for the Imoli EFL Leasing SDK
+globs: **/*.php
+alwaysApply: false
+---
+
+## General PHP guidelines
+
+- Always enable strict types with `declare(strict_types=1);`.
+- Use scalar and object type hints and return types consistently.
+- Avoid using `mixed` unless strictly necessary and document such cases clearly.
+- Prefer immutable value objects (e.g. configuration objects) where appropriate.
+
+## Namespaces and structure
+
+- Place all production code under the `Imoli\\EflLeasingSdk\\` namespace.
+- Place test code under the `Imoli\\EflLeasingSdk\\Tests\\` namespace.
+- Keep files small and focused; each class should live in its own file.
+
+## Exceptions
+
+- Use domain-specific exceptions from the `Imoli\\EflLeasingSdk\\Exception` namespace.
+- Avoid throwing generic `\Exception`; prefer `EflLeasingException` or a dedicated subclass.
+
+## Collections and arrays
+
+- When using associative arrays as data structures, document their expected keys and value types in PHPDoc.
+- For complex or frequently reused structures, prefer dedicated value objects over raw arrays.
+
