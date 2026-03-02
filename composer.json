@@ -1,0 +1,59 @@
+{
+    "name": "imoli-pl/efl-leasing-sdk",
+    "description": "EFL Leasing Online payment SDK for PHP ecommerce platforms.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/imoli-pl/efl-leasing-sdk",
+    "keywords": [
+        "efl",
+        "leasing",
+        "payment",
+        "sdk",
+        "php",
+        "ecommerce"
+    ],
+    "authors": [
+        {
+            "name": "Imoli",
+            "homepage": "https://imoli.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Imoli\\EflLeasingSdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Imoli\\EflLeasingSdk\\Tests\\": "tests/"
+        }
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "For Guzzle HTTP adapter",
+        "psr/log": "For PSR-3 request logging",
+        "symfony/http-client": "For Symfony HTTP adapter"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.0",
+        "phpunit/phpunit": "^11.0",
+        "psr/log": "^3.0",
+        "phpstan/phpstan": "^1.11",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "symfony/http-client": "^6.4|^7.0"
+    },
+    "scripts": {
+        "test": "phpunit --no-coverage",
+        "test:coverage": "phpunit --coverage-text",
+        "test:integration": "phpunit --no-coverage --testsuite=Integration",
+        "phpstan": "phpstan analyse",
+        "cs-fix": "php-cs-fixer fix",
+        "cs-check": "php-cs-fixer fix --dry-run --diff"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
