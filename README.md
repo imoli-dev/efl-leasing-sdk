@@ -10,7 +10,7 @@ It provides a PHP-friendly, testable abstraction over the official EFL Leasing O
 Install the package via Composer:
 
 ```bash
-composer require imoli-pl/efl-leasing-sdk
+composer require imoli-dev/efl-leasing-sdk
 ```
 
 ## Requirements

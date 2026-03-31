@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\CustomerDataStatementBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 final class CustomerDataStatement
 {
@@ -41,9 +42,7 @@ final class CustomerDataStatement
         $payload = [
             'guid' => $this->guid,
             'agreement' => $this->agreement,
-            'statementType' => [
-                'id' => $this->statementTypeId,
-            ],
+            'statementType' => DescriptorPayload::fromId($this->statementTypeId),
         ];
 
         if ($this->validFrom !== null) {

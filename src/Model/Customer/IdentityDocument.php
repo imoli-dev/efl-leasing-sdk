@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\IdentityDocumentBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 /**
  * Represents an identity document (e.g. ID card, passport) required by the EFL API.
@@ -56,9 +57,7 @@ final class IdentityDocument
             'number' => $this->number,
             'issuer' => $this->issuer,
             'issuedOn' => $this->issuedOn,
-            'type' => [
-                'id' => $this->typeId,
-            ],
+            'type' => DescriptorPayload::fromId($this->typeId),
         ];
 
         if ($this->validTo !== null) {

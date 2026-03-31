@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\PersonBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 final class Person
 {
@@ -89,9 +90,7 @@ final class Person
             'birthPlace' => $this->birthPlace,
             'pep' => $this->pep,
             'address' => $this->address->toRequestPayload(),
-            'countryOfOrigin' => [
-                'id' => $this->countryOfOriginId,
-            ],
+            'countryOfOrigin' => DescriptorPayload::fromId($this->countryOfOriginId),
             'identityDocuments' => array_map(
                 static fn (IdentityDocument $doc): array => $doc->toRequestPayload(),
                 $this->identityDocuments,

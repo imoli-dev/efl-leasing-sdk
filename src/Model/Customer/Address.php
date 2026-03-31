@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\AddressBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 /**
  * Represents a postal address used in customer and company data.
@@ -64,18 +65,12 @@ final class Address
         $payload = [
             'guid' => $this->guid,
             'name' => $this->name,
-            'type' => [
-                'id' => $this->typeId,
-            ],
+            'type' => DescriptorPayload::fromId($this->typeId),
             'city' => $this->city,
             'street' => $this->street,
             'houseNumber' => $this->houseNumber,
-            'postal' => [
-                'id' => $this->postalCode,
-            ],
-            'country' => [
-                'id' => $this->countryCode,
-            ],
+            'postal' => DescriptorPayload::fromId($this->postalCode),
+            'country' => DescriptorPayload::fromId($this->countryCode),
         ];
 
         if ($this->flatNumber !== null) {

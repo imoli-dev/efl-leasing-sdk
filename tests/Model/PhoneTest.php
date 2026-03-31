@@ -18,7 +18,11 @@ final class PhoneTest extends TestCase
         self::assertSame('phone-guid', $payload['guid']);
         self::assertSame('+48', $payload['prefix']);
         self::assertSame('123456789', $payload['number']);
-        self::assertSame(['id' => 'mobile'], $payload['type']);
-        self::assertSame(['id' => 'mobile'], $payload['kind']);
+        self::assertSame('mobile', $payload['type']['id']);
+        self::assertSame('mobile', $payload['type']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['type']['version']);
+        self::assertSame('mobile', $payload['kind']['id']);
+        self::assertSame('mobile', $payload['kind']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['kind']['version']);
     }
 }

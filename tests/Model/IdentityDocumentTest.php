@@ -25,7 +25,9 @@ final class IdentityDocumentTest extends TestCase
         self::assertSame('ABC123456', $payload['number']);
         self::assertSame('City Hall Warsaw', $payload['issuer']);
         self::assertSame('2020-01-15', $payload['issuedOn']);
-        self::assertSame(['id' => 'id_card'], $payload['type']);
+        self::assertSame('id_card', $payload['type']['id']);
+        self::assertSame('id_card', $payload['type']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['type']['version']);
         self::assertArrayNotHasKey('validTo', $payload);
     }
 

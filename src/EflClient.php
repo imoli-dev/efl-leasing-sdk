@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk;
 
 use Imoli\EflLeasingSdk\Api\CalculationApiClient;
+use Imoli\EflLeasingSdk\Exception\ApiException;
 use Imoli\EflLeasingSdk\Api\CustomerApiClient;
 use Imoli\EflLeasingSdk\Api\DemoApiClient;
 use Imoli\EflLeasingSdk\Api\LeadApiClient;
@@ -99,6 +100,9 @@ final class EflClient
 
     /**
      * Calculates a basic leasing offer for the given basket.
+     *
+     * When the API returns an empty body (e.g. HTTP 202 Accepted), the SDK
+     * falls back to GetBaseData to retrieve the calculation result.
      */
     public function calculateBasicOffer(AssetToCalculation $basket, string $bearerToken): EsbCalculateBasicOfferRestReturn
     {
@@ -106,16 +110,34 @@ final class EflClient
 
         $body = $response->getBody();
 
-        if ($body === '') {
-            return EsbCalculateBasicOfferRestReturn::emptyForTransaction(
-                $basket->getTransactionId(),
-            );
+        if ($body !== '') {
+            try {
+                /** @var array<string, mixed> $data */
+                $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+                $calcData = isset($data['calculation']) && is_array($data['calculation'])
+                    ? $data['calculation']
+                    : $data;
+                $result = EsbCalculateBasicOfferRestReturn::fromArray($calcData);
+                if ($result->variants !== []) {
+                    return $result;
+                }
+            } catch (\JsonException) {
+                // Fall through to getBaseData attempt.
+            }
         }
 
-        /** @var array<string, mixed> $data */
-        $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            $baseData = $this->getBaseData($basket->getTransactionId(), $bearerToken);
+            if ($baseData->calculation !== null && $baseData->calculation->variants !== []) {
+                return $baseData->calculation;
+            }
+        } catch (ApiException|\JsonException) {
+            // Fall through to empty result.
+        }
 
-        return EsbCalculateBasicOfferRestReturn::fromArray($data);
+        return EsbCalculateBasicOfferRestReturn::emptyForTransaction(
+            $basket->getTransactionId(),
+        );
     }
 
     /**

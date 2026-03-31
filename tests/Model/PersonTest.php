@@ -41,7 +41,9 @@ final class PersonTest extends TestCase
         self::assertSame('1990-01-01', $payload['birthDate']);
         self::assertSame('Warsaw', $payload['birthPlace']);
         self::assertFalse($payload['pep']);
-        self::assertSame(['id' => 'PL'], $payload['countryOfOrigin']);
+        self::assertSame('PL', $payload['countryOfOrigin']['id']);
+        self::assertSame('PL', $payload['countryOfOrigin']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['countryOfOrigin']['version']);
         self::assertArrayHasKey('identityDocuments', $payload);
         self::assertCount(1, $payload['identityDocuments']);
         self::assertSame('ABC123456', $payload['identityDocuments'][0]['number']);

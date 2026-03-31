@@ -1,9 +1,9 @@
 {
-    "name": "imoli-pl/efl-leasing-sdk",
+    "name": "imoli-dev/efl-leasing-sdk",
     "description": "EFL Leasing Online payment SDK for PHP ecommerce platforms.",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/imoli-pl/efl-leasing-sdk",
+    "homepage": "https://github.com/imoli-dev/efl-leasing-sdk",
     "keywords": [
         "efl",
         "leasing",

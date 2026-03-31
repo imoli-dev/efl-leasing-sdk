@@ -37,7 +37,11 @@ final class AssetToCalculationBuilderTest extends TestCase
             ->build();
 
         $payload = $basket->toRequestPayload();
+        self::assertArrayHasKey('returnToBasketUrl', $payload);
+        self::assertArrayHasKey('basketCalculation', $payload);
+        /** @phpstan-ignore offsetAccess.notFound (assertArrayHasKey guarantees key exists) */
         self::assertSame('https://shop.com/basket', $payload['returnToBasketUrl']);
+        /** @phpstan-ignore offsetAccess.notFound (assertArrayHasKey guarantees key exists) */
         self::assertTrue($payload['basketCalculation']);
     }
 
