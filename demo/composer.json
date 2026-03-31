@@ -1,0 +1,17 @@
+{
+    "name": "imoli-dev/efl-leasing-sdk-demo",
+    "description": "Simple PoC demo for EFL Leasing SDK - form to sandbox redirect.",
+    "type": "project",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.1",
+        "imoli-dev/efl-leasing-sdk": "dev-master",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/imoli-dev/efl-leasing-sdk"
+        }
+    ]
+}

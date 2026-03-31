@@ -17,7 +17,9 @@ final class CustomerDataStatementTest extends TestCase
 
         self::assertSame('stmt-guid', $payload['guid']);
         self::assertTrue($payload['agreement']);
-        self::assertSame(['id' => 'gdpr'], $payload['statementType']);
+        self::assertSame('gdpr', $payload['statementType']['id']);
+        self::assertSame('gdpr', $payload['statementType']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['statementType']['version']);
         self::assertArrayNotHasKey('validFrom', $payload);
     }
 

@@ -26,7 +26,8 @@ final class AddressBuilderTest extends TestCase
         self::assertInstanceOf(Address::class, $address);
         $payload = $address->toRequestPayload();
         self::assertSame('Warsaw', $payload['city']);
-        self::assertSame(['id' => 'registered_office'], $payload['type']);
+        self::assertSame('registered_office', $payload['type']['id']);
+        self::assertSame('registered_office', $payload['type']['name']);
     }
 
     public function testBuildIncludesFlatNumberWhenSet(): void

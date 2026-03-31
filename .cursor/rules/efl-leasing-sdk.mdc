@@ -6,7 +6,7 @@ alwaysApply: true
 ## Project context
 
 - This repository contains a PHP SDK for integrating **EFL Leasing Online** as a payment method in ecommerce platforms.
-- The primary Composer package name is `imoli-pl/efl-leasing-sdk`.
+- The primary Composer package name is `imoli-dev/efl-leasing-sdk`.
 - The root namespace is `Imoli\\EflLeasingSdk\\` with PSR-4 autoloading from the `src/` directory.
 
 ## Language and style

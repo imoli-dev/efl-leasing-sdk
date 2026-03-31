@@ -10,12 +10,12 @@ It provides a PHP-friendly, testable abstraction over the official EFL Leasing O
 Install the package via Composer:
 
 ```bash
-composer require imoli-pl/efl-leasing-sdk
+composer require imoli-dev/efl-leasing-sdk
 ```
 
 ## Requirements
 
-- PHP ^8.2
+- PHP ^8.1 (8.2 or newer recommended)
 - `ext-json`
 - Composer for dependency management
 
@@ -24,15 +24,14 @@ composer require imoli-pl/efl-leasing-sdk
 Local technical documentation for this SDK is available in the `docs/` directory.
 Files and directories are numbered for correct ordering in documentation generators (e.g. Nuxt Content).
 
-- `docs/1.overview.md` – high-level overview and when to use the SDK.
-- `docs/2.installation.md` – installation and requirements.
-- `docs/3.quickstart.md` – first steps and basic offer calculation.
-- `docs/4.configuration.md` – environment and HTTP client configuration.
-- `docs/2.concepts/` – core concepts (leasing flow, SDK architecture, error handling, models and builders).
-- `docs/5.api/` – API clients overview, models overview, error handling.
-- `docs/5.api/4.reference/` – full API reference (EflClient methods, Config, clients, builders, models, HTTP, exceptions, enums).
-- `docs/6.guides/` – sandbox setup, integration patterns and a full payment flow example that mirrors the sandbox documentation while using the SDK instead of raw HTTP.
-- `docs/7.development/` – setup, conventions, testing and contributing for SDK developers (including detailed coding conventions).
+- [`docs/01.index.md`](docs/01.index.md) – high-level overview and when to use the SDK.
+- [`docs/02.getting-started.md`](docs/02.getting-started.md) – minimal setup and first API call.
+- [`docs/03.installation.md`](docs/03.installation.md) – installation and requirements.
+- [`docs/04.quickstart.md`](docs/04.quickstart.md) – end-to-end minimal integration example.
+- [`docs/05.configuration.md`](docs/05.configuration.md) – environment and HTTP client configuration.
+- [`docs/06.api/`](docs/06.api/01.overview.md) – API clients, models, builders, errors and HTTP reference.
+- [`docs/07.guides/`](docs/07.guides/01.sandbox-setup.md) – sandbox setup, integration patterns and full payment flows.
+- [`docs/08.development/`](docs/08.development/01.contributing.md) – contributing, testing and coding standards.
 
 ## Architecture overview
 

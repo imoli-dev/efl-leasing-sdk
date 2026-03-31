@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\EmailAddressBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 final class EmailAddress
 {
@@ -34,9 +35,7 @@ final class EmailAddress
         return [
             'guid' => $this->guid,
             'email' => $this->email,
-            'type' => [
-                'id' => $this->typeId,
-            ],
+            'type' => DescriptorPayload::fromId($this->typeId),
         ];
     }
 }

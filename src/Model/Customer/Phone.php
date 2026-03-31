@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imoli\EflLeasingSdk\Model\Customer;
 
 use Imoli\EflLeasingSdk\Builder\PhoneBuilder;
+use Imoli\EflLeasingSdk\Model\DescriptorPayload;
 
 final class Phone
 {
@@ -46,12 +47,8 @@ final class Phone
             'guid' => $this->guid,
             'prefix' => $this->prefix,
             'number' => $this->number,
-            'type' => [
-                'id' => $this->typeId,
-            ],
-            'kind' => [
-                'id' => $this->kindId,
-            ],
+            'type' => DescriptorPayload::fromId($this->typeId),
+            'kind' => DescriptorPayload::fromId($this->kindId),
         ];
     }
 }

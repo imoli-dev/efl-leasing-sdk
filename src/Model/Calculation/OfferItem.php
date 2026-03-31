@@ -97,15 +97,15 @@ final class OfferItem
         }
 
         if ($this->totalAmountNet !== null) {
-            $payload['totalAmountNet'] = $this->totalAmountNet;
+            $payload['totalAmountNet'] = round($this->totalAmountNet, 4);
         }
 
         if ($this->netValue !== null) {
-            $payload['netValue'] = $this->netValue;
+            $payload['netValue'] = round($this->netValue, 4);
         }
 
         if ($this->grossValue !== null) {
-            $payload['grossValue'] = $this->grossValue;
+            $payload['grossValue'] = round($this->grossValue, 4);
         }
 
         return $payload;

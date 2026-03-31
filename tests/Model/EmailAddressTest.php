@@ -17,6 +17,8 @@ final class EmailAddressTest extends TestCase
 
         self::assertSame('email-guid', $payload['guid']);
         self::assertSame('contact@example.com', $payload['email']);
-        self::assertSame(['id' => 'work'], $payload['type']);
+        self::assertSame('work', $payload['type']['id']);
+        self::assertSame('work', $payload['type']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['type']['version']);
     }
 }

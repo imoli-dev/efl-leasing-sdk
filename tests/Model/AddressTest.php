@@ -29,9 +29,15 @@ final class AddressTest extends TestCase
         self::assertSame('Warsaw', $payload['city']);
         self::assertSame('Main St', $payload['street']);
         self::assertSame('1', $payload['houseNumber']);
-        self::assertSame(['id' => '00-001'], $payload['postal']);
-        self::assertSame(['id' => 'PL'], $payload['country']);
-        self::assertSame(['id' => 'registered_office'], $payload['type']);
+        self::assertSame('00-001', $payload['postal']['id']);
+        self::assertSame('00-001', $payload['postal']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['postal']['version']);
+        self::assertSame('PL', $payload['country']['id']);
+        self::assertSame('PL', $payload['country']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['country']['version']);
+        self::assertSame('registered_office', $payload['type']['id']);
+        self::assertSame('registered_office', $payload['type']['name']);
+        self::assertSame(['major' => 1, 'minor' => 0, 'patch' => 0], $payload['type']['version']);
         self::assertArrayNotHasKey('flatNumber', $payload);
     }
 
